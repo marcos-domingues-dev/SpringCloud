@@ -1,0 +1,7 @@
+
+# Config para não se (auto) registrar no eureka  nm guardar informações de outras app cache
+eureka:  client:    fetch-registry: false
+    register-with-eureka: false
+
+# Porta padrão do Eureka Server 8761
+server:  port: 8761
