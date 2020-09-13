@@ -1,0 +1,10 @@
+
+# Este spring.application.name será recuperado pelo Eureka Clint para registrar este serviço
+spring:
+  application:
+    name: 'fornecedor'    
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8888

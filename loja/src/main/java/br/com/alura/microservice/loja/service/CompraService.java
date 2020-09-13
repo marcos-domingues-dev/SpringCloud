@@ -13,11 +13,15 @@ import br.com.alura.microservice.loja.controller.dto.InfoFornecedorDTO;
 public class CompraService {
 	
 	@Autowired
-	RestTemplate restTemplate;
+	RestTemplate restTemplate; // -> @Bean -> LojaApplication.getRestTemplate()
 
 	public void realizaCompra(CompraDTO compra) {				
-		ResponseEntity<InfoFornecedorDTO> exchange = restTemplate.exchange("http://fornecedor/info/" + compra.getEndereco().getEstado(),
-				HttpMethod.GET, null, InfoFornecedorDTO.class);
+		ResponseEntity<InfoFornecedorDTO> exchange = 
+			restTemplate.exchange(
+				"http://fornecedor/info/" + compra.getEndereco().getEstado(),
+				HttpMethod.GET, 
+				null, 
+				InfoFornecedorDTO.class);
 		
 		System.out.println(exchange.getBody().getEndereco());
 	}
