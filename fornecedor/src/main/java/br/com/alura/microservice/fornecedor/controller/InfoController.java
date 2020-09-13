@@ -13,11 +13,11 @@ import br.com.alura.microservice.fornecedor.service.InfoService;
 public class InfoController {
 	
 	@Autowired
-	private InfoService service;
+	private InfoService infoService;
 	
 	@RequestMapping("/{estado}")
 	public InfoFornecedor getInfoPorEstado(@PathVariable String estado) {
-		return service.getInfoPorEstado(estado);
+		return infoService.getInfoPorEstado(estado);
 	}
 
 }

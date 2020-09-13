@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.microservice.loja.controller.dto.CompraDTO;
+import br.com.alura.microservice.loja.modelo.Compra;
 import br.com.alura.microservice.loja.service.CompraService;
 
 @RestController
@@ -17,8 +18,8 @@ public class CompraController {
 	private CompraService compraService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void realizarCompra(@RequestBody CompraDTO compraDto) {
-		compraService.realizaCompra(compraDto);
+	public Compra realizarCompra(@RequestBody CompraDTO compraDto) {
+		return compraService.realizaCompra(compraDto);
 	}
 
 }
