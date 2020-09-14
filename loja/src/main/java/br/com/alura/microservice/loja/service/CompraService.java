@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import br.com.alura.microservice.loja.client.FornecedorClient;
 import br.com.alura.microservice.loja.controller.dto.CompraDTO;
 import br.com.alura.microservice.loja.controller.dto.InfoFornecedorDTO;
@@ -19,11 +21,14 @@ public class CompraService {
 	@Autowired
 	FornecedorClient fornecedorClient;
 	
+	@HystrixCommand(fallbackMethod = "realizaCompraFallback")
 	public Compra realizaCompra(CompraDTO compra) {
 		final String estado = compra.getEndereco().getEstado();
 				
 		LOG.info("buscando informações do fornecedor de {}", estado);
 		InfoFornecedorDTO info = fornecedorClient.getInfoPorEstado(compra.getEndereco().getEstado());
+		
+		System.out.println(info.getEndereco());
 		
 		LOG.info("realizando um pedido");
 		InfoPedidoDTO pedido = fornecedorClient.realizaPedido(compra.getItens());
@@ -33,7 +38,19 @@ public class CompraService {
 		compraSalva.setTempoDePreparo(pedido.getTempoDePreparo());
 		compraSalva.setEnderecoDeDestino(compra.getEndereco().toString());
 		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		return compraSalva;
+	}
+	
+	public Compra realizaCompraFallback(CompraDTO compra) {
+		Compra compraFallback = new Compra();
+		compraFallback.setEnderecoDeDestino(compra.getEndereco().toString());
+		return compraFallback;
 	}
 
 }
