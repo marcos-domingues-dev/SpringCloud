@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"itens\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantidade\" : 5\r\n        },        \r\n        {\r\n            \"id\": 2,\r\n            \"quantidade\" : 1\r\n        }\r\n    ],\r\n    \"endereco\": {\r\n        \"rua\" : \"Rua dos piratas\",\r\n        \"numero\" : 123,\r\n        \"estado\" : \"GO\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"itens\": [\r\n        {\r\n            \"id\": 3,\r\n            \"quantidade\" : 12\r\n        },        \r\n        {\r\n            \"id\": 2,\r\n            \"quantidade\" : 7\r\n        }\r\n    ],\r\n    \"endereco\": {\r\n        \"rua\" : \"Rua dos piratas\",\r\n        \"numero\" : 123,\r\n        \"estado\" : \"GO\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -57,6 +57,54 @@
 			"response": []
 		},
 		{
+			"name": "FORNECEDOR - produto por estado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/produto/RS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"produto",
+						"RS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FORNECEDOR - pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": 1,\r\n        \"quantidade\": 5\r\n    },\r\n    {\r\n        \"id\": 2,\r\n        \"quantidade\": 15\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "EUREKA - apps",
 			"request": {
 				"method": "GET",
@@ -71,6 +119,46 @@
 					"path": [
 						"eureka",
 						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONFIG-SERVER - fornecedor default",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/fornecedor/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"fornecedor",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONFIG-SERVER - fornecedor dev",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/fornecedor/dev",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"fornecedor",
+						"dev"
 					]
 				}
 			},
