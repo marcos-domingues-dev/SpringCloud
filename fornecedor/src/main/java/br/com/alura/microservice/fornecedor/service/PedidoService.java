@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import br.com.alura.microservice.fornecedor.dto.ItemDoPedidoDTO;
 import br.com.alura.microservice.fornecedor.model.Pedido;
 import br.com.alura.microservice.fornecedor.model.PedidoItem;
-import br.com.alura.microservice.fornecedor.model.PedidoStatus;
 import br.com.alura.microservice.fornecedor.model.Produto;
 import br.com.alura.microservice.fornecedor.repository.PedidoRepository;
 import br.com.alura.microservice.fornecedor.repository.ProdutoRepository;
@@ -23,8 +22,7 @@ public class PedidoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
-	public Pedido realizaPedido(List<ItemDoPedidoDTO> itens) {
-		
+	public Pedido realizaPedido(List<ItemDoPedidoDTO> itens) {		
 		if(itens == null) {
 			return null;
 		}
@@ -32,6 +30,7 @@ public class PedidoService {
 		List<PedidoItem> pedidoItens = toPedidoItem(itens);
 		Pedido pedido = new Pedido(pedidoItens);
 		pedido.setTempoDePreparo(itens.size());
+		
 		return pedidoRepository.save(pedido);
 	}
 	
@@ -39,8 +38,7 @@ public class PedidoService {
 		return this.pedidoRepository.findById(id).orElse(new Pedido());
 	}
 
-	private List<PedidoItem> toPedidoItem(List<ItemDoPedidoDTO> itens) {
-		
+	private List<PedidoItem> toPedidoItem(List<ItemDoPedidoDTO> itens) {		
 		List<Long> idsProdutos = itens
 				.stream()
 				.map(item -> item.getId())
@@ -62,6 +60,7 @@ public class PedidoService {
 				return pedidoItem;
 			})
 			.collect(Collectors.toList());
+		
 		return pedidoItens;
 	}
 }

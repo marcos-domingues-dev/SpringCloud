@@ -1,11 +1,17 @@
 
+# Porta default
 server:
   port: 8081
+
+# Este spring.application.name será recuperado pelo Eureka Clint para registrar este serviço
+spring:
+  application:
+    name: 'fornecedor'
 
 # Registrando este serviço no Eureka
 eureka:
   client:
     register-with-eureka: true
-    fetch-registry: true    
+    fetch-registry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
